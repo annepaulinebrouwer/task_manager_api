@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507100010) do
+ActiveRecord::Schema.define(version: 20160507172802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,14 +27,30 @@ ActiveRecord::Schema.define(version: 20160507100010) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
+
+  add_index "tasklists", ["user_id"], name: "index_tasklists_on_user_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "tasklist_id"
   end
+
+  add_index "tasks", ["tasklist_id"], name: "index_tasks_on_tasklist_id", using: :btree
+
+  create_table "tasktagrelations", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tasktagrelations", ["tag_id"], name: "index_tasktagrelations_on_tag_id", using: :btree
+  add_index "tasktagrelations", ["task_id"], name: "index_tasktagrelations_on_task_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -49,9 +65,15 @@ ActiveRecord::Schema.define(version: 20160507100010) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "authentication_token"
   end
 
+  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "tasklists", "users"
+  add_foreign_key "tasks", "tasklists"
+  add_foreign_key "tasktagrelations", "tags"
+  add_foreign_key "tasktagrelations", "tasks"
 end

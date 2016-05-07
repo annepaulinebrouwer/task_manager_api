@@ -11,6 +11,7 @@ gem 'redis'
 gem 'pundit'
 gem "responders"
 gem "roar-rails"
+gem "simple_token_authentication"
 
 gem 'sass-rails'
 gem 'jquery-rails'

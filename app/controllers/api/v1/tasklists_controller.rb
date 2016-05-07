@@ -8,23 +8,23 @@ class Api::V1::TasklistsController < Api::V1::BaseController
   def show
   end
 
-  # def create
-  #   @tasklist = current_user.tasklists.build(tasklist_params)
-  #   authorize @tasklist
-  #   if @tasklist.save
-  #     render :show
-  #   else
-  #     render_error
-  #   end
-  # end
+  def create
+    @tasklist = current_user.tasklists.build(tasklist_params)
+    authorize @tasklist
+    if @tasklist.save
+      render :show
+    else
+      render_error
+    end
+  end
 
-  # def update
-  #   if @tasklist.update(tasklist_params)
-  #     render :show
-  #   else
-  #     render_error
-  #   end
-  # end
+  def update
+    if @tasklist.update(tasklist_params)
+      render :show
+    else
+      render_error
+    end
+  end
 
 
   private
@@ -38,7 +38,7 @@ class Api::V1::TasklistsController < Api::V1::BaseController
     params.require(:tasklist).permit(:name, :description)
   end
 
-  # def render_error
-  #   render json: { errors: @tasklist.errors.full_messages }, status: :unprocessable_entity
-  # end
+  def render_error
+    render json: { errors: @tasklist.errors.full_messages }, status: :unprocessable_entity
+  end
 end
