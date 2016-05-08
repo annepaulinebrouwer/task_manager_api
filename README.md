@@ -35,12 +35,8 @@ curl -i -X POST
         http://localhost:3000/api/v1/tasks
 
 
-curl -i -X DELETE                                      \
+curl -i -X DELETE                                     \
        -H 'Content-Type: application/json'              \
        -H 'X-User-Email: blendle@gmail.com'               \
        -H 'X-User-Token: Vynt534YuSzsLsJNysB1'          \
-        http://localhost:3000/api/v1/tasks/20
-
-curl -i -X DELETE      \
-        http://localhost:3000/api/v1/tasks/20
-
+        http://localhost:3000/api/v1/tasks/22

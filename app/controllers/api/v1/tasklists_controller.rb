@@ -1,5 +1,5 @@
 class Api::V1::TasklistsController < Api::V1::BaseController
-  before_action :set_tasklist, only: [ :show, :update ]
+  before_action :set_tasklist, only: [ :show, :update, :destroy ]
 
   def index
    @tasklists = policy_scope(Tasklist)
@@ -26,6 +26,10 @@ class Api::V1::TasklistsController < Api::V1::BaseController
     end
   end
 
+ def destroy
+    @tasklist.destroy!
+      render :index
+  end
 
   private
 

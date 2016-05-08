@@ -1,5 +1,5 @@
 class Api::V1::TagsController < Api::V1::BaseController
-  before_action :set_tag, only: [ :show, :update ]
+  before_action :set_tag, only: [ :show, :update, :destroy ]
 
   def index
    @tags = policy_scope(Tag)
@@ -26,6 +26,10 @@ class Api::V1::TagsController < Api::V1::BaseController
     end
   end
 
+  def destroy
+    @tag.destroy!
+      render :index
+  end
 
   private
 

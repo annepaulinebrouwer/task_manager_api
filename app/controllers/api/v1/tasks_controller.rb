@@ -1,5 +1,5 @@
 class Api::V1::TasksController < Api::V1::BaseController
-  before_action :set_task, only: [ :show, :update ]
+  before_action :set_task, only: [ :show, :update, :destroy ]
   # before_action :find_tasklist, only: [:create]
 
   def index
@@ -30,14 +30,11 @@ class Api::V1::TasksController < Api::V1::BaseController
   end
 
   def destroy
-    @task.destroy
+    @task.destroy!
+      render :index
   end
 
   private
-
-  # def find_tasklist
-  #   @tasklist = Tasklist.find(params[:tasklist_id])
-  # end
 
   def set_task
     @task = Task.find(params[:id])
