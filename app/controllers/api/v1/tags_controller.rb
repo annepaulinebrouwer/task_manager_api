@@ -9,7 +9,7 @@ class Api::V1::TagsController < Api::V1::BaseController
   end
 
   def create
-    @tag = current_user.tags.build(tag_params)
+    @tag = Tag.new(tag_params)
     authorize @tag
     if @tag.save
       render :show
@@ -35,7 +35,7 @@ class Api::V1::TagsController < Api::V1::BaseController
   end
 
   def tag_params
-    params.require(:tag).permit(:name, :description)
+    params.require(:tag).permit(:name, :description, :task_id)
   end
 
   def render_error

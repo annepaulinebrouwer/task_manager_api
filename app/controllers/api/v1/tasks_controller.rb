@@ -29,6 +29,9 @@ class Api::V1::TasksController < Api::V1::BaseController
     end
   end
 
+  def destroy
+    @task.destroy
+  end
 
   private
 

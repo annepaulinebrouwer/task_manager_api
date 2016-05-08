@@ -1,7 +1,7 @@
 class TaskPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      scope.all
     end
   end
 
@@ -14,6 +14,10 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def update?
-    record.user == user
+    true
+  end
+
+  def destroy?
+    true
   end
 end
