@@ -1,7 +1,7 @@
-class TasklistPolicy < ApplicationPolicy
+class TagPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      scope
     end
   end
 
@@ -17,4 +17,3 @@ class TasklistPolicy < ApplicationPolicy
     record.user == user
   end
 end
-

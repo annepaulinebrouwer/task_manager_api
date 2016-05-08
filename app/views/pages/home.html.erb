@@ -1,2 +1,15 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4 col-sm-12">
+      <div class="intro">
+        <h1>Welcome to the Task Manager API</h1>
+        <p>Please sign-in/up first, so you are authorized to use the web service</p>
+        <ul>
+          <li>Here you can <%= link_to "sign in",  new_user_registration_path, {class: "link"}  %></li>
+          <li>And here can you <%= link_to "log in", new_user_session_path, {class: "link"}  %></li>
+          <li>And than go to the API by clicking <%= link_to "here", api_v1_tasklists_path, {class: "link"}  %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
