@@ -6,6 +6,7 @@ json.tasklists do
     unless tasklist.tasks.empty?
       json.tasks tasklist.tasks do |task|
         json.name task.name
+        json.description task.description
       end
     end
   end
