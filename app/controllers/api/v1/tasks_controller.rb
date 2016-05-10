@@ -11,11 +11,9 @@ class Api::V1::TasksController < Api::V1::BaseController
 
   def create
     @task = Task.new(task_params)
-    # @task.tasklist = @tasklist
     authorize @task
     if @task.save
       render :show
-      # render api_v1_tasklist_path(:tasklist_id)
     else
       render_error
     end

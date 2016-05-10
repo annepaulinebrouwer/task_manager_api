@@ -1,60 +1,82 @@
-This is a Ruby on Rails project.
-You will need to run a local server before you can run the app. Download the  via your termial using the command "rails s"
+Hello!
+This is a Task Manager API.
 
+You can
+  - create tasklist
+  - delete tasklist
+  - update tasklist
 
-You can signup or use the following log-in:
-  email: blendle@gmail.com
-  password: password
+In a tasklist you can
+    - create tasks
+    - update tasks
+    - delete tasks
 
-Using curl via the terminal
+You can make customized tags to orden your tasks
+      - create tags
+      - assign tags to a task
+      - you can use tags on multiple tasks (e.g. #urgent)
 
-*********************************local host****************************************
+*******************************************************************************
+The API is build using Ruby on Rails
+You can access the API on https://taskmanagerapi.herokuapp.com/api/v1/tasklists
+To use the create, update and delete functions you will need to sign up.
+Pundit is used to build authorization policies.
 
-To send a GET request to the API for e.g. tasklist/1:
+I also build an API Client, using Ruby on Rails.
+You can access the API Client on http://taskmanager-api-client.herokuapp.com
+At the client side the following functions are developed
+  - show all tasklist
+  - show a tasklist with tasks
+  - create tasklist
+  - delete tasklist
+  - create tasks
+  - delete tasks
 
-curl -i -X GET                                                             \
-       -H 'Content-Type: application/json'                                     \
-       -H 'X-User-Email: blendle@gmail.com'                                      \
-       -H 'X-User-Token: Vynt534YuSzsLsJNysB1'                                 \
-       http://localhost:3000/api/v1/tasklists/1
+In order to use the other functions of the API it is possible to use curl and send requests via the command line. Because authentication is required (and authorization regarding update) I provide an user-token. Beaware that some of the commands are depending on specific id's. In case that those object don't exist anymore, an error will occurr.
+
+*************************************************************************
 
 To send a PATCH request to the API for e.g. updating tasklist/2:
 
 curl -i -X PATCH                                      \
        -H 'Content-Type: application/json'              \
        -H 'X-User-Email: blendle@gmail.com'               \
-       -H 'X-User-Token: Vynt534YuSzsLsJNysB1'          \
-       -d '{ "tasklist": { "name": "Holiday" } }'    \
-       http://localhost:3000/api/v1/tasklists/2
+       -H 'X-User-Token: n9jc9FRoJ28JvzcdJj_K'          \
+       -d '{ "tasklist": { "name": "Holiday", "description": "This is update is send via the commandline"  } }'    \
+       https://taskmanagerapi.herokuapp.com/api/v1/tasklists/2
 
-curl -i -X DELETE                                     \
+To send a POST request to create a new task and assign it to a tasklist (tasklist_id: 2)
+
+curl -i -X POST  \
        -H 'Content-Type: application/json'              \
        -H 'X-User-Email: blendle@gmail.com'               \
-       -H 'X-User-Token: Vynt534YuSzsLsJNysB1'          \
-        http://localhost:3000/api/v1/tasks/22
+       -H 'X-User-Token: n9jc9FRoJ28JvzcdJj_K'          \
+       -d '{ "task": { "name": "Visa", "description": "Checking embassy for visa requirements", "tasklist_id": "2" } }'    \
+       https://taskmanagerapi.herokuapp.com/api/v1/tasks
 
-*********************HEROKU*********************************************************
-To send a POST request to create a tasklist
+
+To send a POST request to create a new tag
 
 curl -i -X POST \
        -H 'Content-Type: application/json'              \
        -H 'X-User-Email: blendle@gmail.com'               \
        -H 'X-User-Token: n9jc9FRoJ28JvzcdJj_K'          \
-       -d '{ "tasklist": { "name": "Work", "description": "All these tasks related to the my working life" } }'    \
-       https://taskmanagerapi.herokuapp.com/api/v1/tasklists
+       -d '{ "tag": { "name": "#tomorrow" } }'    \
+       https://taskmanagerapi.herokuapp.com/api/v1/tags
 
-To send a POST request to create a new task and assign it to a tasklist (by tasklist_id)
+To assign a existing tag (#today) to a task (with id:17)
 
-curl -i -X POST  \
+curl -i -X POST \
        -H 'Content-Type: application/json'              \
        -H 'X-User-Email: blendle@gmail.com'               \
        -H 'X-User-Token: n9jc9FRoJ28JvzcdJj_K'          \
-       -d '{ "task": { "name": "Flights", "description": "Checking flights to different holiday destations and different timeslots", "tasklist_id": "2" } }'    \
-       https://taskmanagerapi.herokuapp.com/api/v1/tasks
+       -d '{ "tasktagrelation": { "tag_id": "1", "task_id": "17"} }'    \
+       https://taskmanagerapi.herokuapp.com/api/v1/tags
 
-curl -i -X POST  \
+<!-- To delete a tag (with tag_id 4)
+
+curl -i -X DELETE                                     \
        -H 'Content-Type: application/json'              \
        -H 'X-User-Email: blendle@gmail.com'               \
        -H 'X-User-Token: n9jc9FRoJ28JvzcdJj_K'          \
-       -d '{ "task": { "name": "Tours", "description": "Checking jungle tours", "tasklist_id": "2" } }'    \
-       https://taskmanagerapi.herokuapp.com/api/v1/tasklists
+       https://taskmanagerapi.herokuapp.com/api/v1/tags -->

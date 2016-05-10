@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :tasklists, only: [ :index, :show, :update, :create, :destroy ]
       resources :tasks, only: [ :index, :show, :update, :create, :destroy]
       resources :tags, only: [ :index, :show, :update, :create, :destroy ]
+      resources :tasktagrelations, only: [ :create, :destroy ]
     end
   end
 end
