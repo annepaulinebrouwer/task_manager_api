@@ -32,7 +32,7 @@ At the client side the following functions are developed
   - create tasks
   - delete tasks
 
-In order to use the other functions of the API it is possible to use curl and send requests via the command line. Because authentication is required (and authorization regarding update) I provide an user-token. Beaware that some of the commands are depending on specific id's. In case that those object don't exist anymore, an error will occurr.
+In order to use the other functions of the API it is possible to use curl and send requests via the command line. Because authentication is required (and authorization regarding update) I provide an user-token. Beaware that some of the commands are depending on specific id's. It could be posible that the object doesn't exist anymore, because it has been deleted. Try the command than with another id.
 
 *************************************************************************
 
@@ -71,12 +71,10 @@ curl -i -X POST \
        -H 'X-User-Email: blendle@gmail.com'               \
        -H 'X-User-Token: n9jc9FRoJ28JvzcdJj_K'          \
        -d '{ "tasktagrelation": { "tag_id": "1", "task_id": "17"} }'    \
-       https://taskmanagerapi.herokuapp.com/api/v1/tags
+       https://taskmanagerapi.herokuapp.com/api/v1/tasktagrelations
 
-<!-- To delete a tag (with tag_id 4)
+******************************************************************************
 
-curl -i -X DELETE                                     \
-       -H 'Content-Type: application/json'              \
-       -H 'X-User-Email: blendle@gmail.com'               \
-       -H 'X-User-Token: n9jc9FRoJ28JvzcdJj_K'          \
-       https://taskmanagerapi.herokuapp.com/api/v1/tags -->
+Have a look at the API Client on http://taskmanager-api-client.herokuapp.com
+
+*****************************************************************************
