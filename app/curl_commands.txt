@@ -1,0 +1,45 @@
+
+These are curl commands that can be used to communicate with the API.
+The API functions on basis of authentication and authorization policies.
+To make sure that you can test it, I provide an authentication token.
+Beaware that some of the commands are depending on specific id's. It could be posible that the object doesn't exist anymore, because it has been deleted. Try the command than with another id.
+
+*************************************************************************
+
+To send a PATCH request to the API for e.g. updating tasklist/2:
+
+curl -i -X PATCH                                      \
+       -H 'Content-Type: application/json'              \
+       -H 'X-User-Email: blendle@gmail.com'               \
+       -H 'X-User-Token: n9jc9FRoJ28JvzcdJj_K'          \
+       -d '{ "tasklist": { "name": "Holiday", "description": "This is update is send via the commandline"  } }'    \
+       https://taskmanagerapi.herokuapp.com/api/v1/tasklists/2
+
+To send a POST request to create a new task and assign it to a tasklist (tasklist_id: 2)
+
+curl -i -X POST  \
+       -H 'Content-Type: application/json'              \
+       -H 'X-User-Email: blendle@gmail.com'               \
+       -H 'X-User-Token: n9jc9FRoJ28JvzcdJj_K'          \
+       -d '{ "task": { "name": "Visa", "description": "Checking embassy for visa requirements", "tasklist_id": "2" } }'    \
+       https://taskmanagerapi.herokuapp.com/api/v1/tasks
+
+
+To send a POST request to create a new tag
+
+curl -i -X POST \
+       -H 'Content-Type: application/json'              \
+       -H 'X-User-Email: blendle@gmail.com'               \
+       -H 'X-User-Token: n9jc9FRoJ28JvzcdJj_K'          \
+       -d '{ "tag": { "name": "#tomorrow" } }'    \
+       https://taskmanagerapi.herokuapp.com/api/v1/tags
+
+To assign a existing tag (#today) to a task (with id:17)
+
+curl -i -X POST \
+       -H 'Content-Type: application/json'              \
+       -H 'X-User-Email: blendle@gmail.com'               \
+       -H 'X-User-Token: n9jc9FRoJ28JvzcdJj_K'          \
+       -d '{ "tasktagrelation": { "tag_id": "1", "task_id": "17"} }'    \
+       https://taskmanagerapi.herokuapp.com/api/v1/tasktagrelations
+
